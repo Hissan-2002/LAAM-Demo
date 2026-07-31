@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Product {
+  id        String     @id @default(cuid())
+  name      String
+  brand     String
+  category  String
+  basePrice Float
+  images    String
+  sellerId  String
+  seller    Seller     @relation(fields: [sellerId], references: [id])
+  variants  Variant[]
+  priceRule PriceRule?
+  createdAt DateTime   @default(now())
+}
+
+model Variant {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size      String
+  stock     Int
+  sku       String
+}
+
+model PriceRule {
+  id                String    @id @default(cuid())
+  productId         String    @unique
+  product           Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  discountPct       Float?
+  discountExpiresAt DateTime?
+}
+
+model Seller {
+  id              String        @id @default(cuid())
+  name            String
+  deliveryDaysMin Int           @default(3)
+  deliveryDaysMax Int           @default(5)
+  products        Product[]
+  deliveryLogs    DeliveryLog[]
+}
+
+model DeliveryLog {
+  id           String   @id @default(cuid())
+  sellerId     String
+  seller       Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  promisedDate DateTime
+  actualDate   DateTime
+}
