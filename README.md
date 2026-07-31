@@ -1,6 +1,6 @@
-# LAAM Purchase Confidence
+# LAAM Purchase Confidence - Hissan Butt 
 
-A focused full-stack slice of a fashion marketplace Product Detail Page (PDP) that helps customers decide with **explainable purchase confidence** (availability, final price, delivery trust, and alternatives) instead of decorative badges alone.
+A focused full-stack slice of a fashion marketplace Product Detail Page (PDP) that helps customers decide with **explainable purchase confidence** (availability, final price, delivery trust, and alternatives) instead of decorative badges alone. Made for LAAM hiring assignment by Hissan Butt
 
 ---
 
